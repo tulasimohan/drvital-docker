@@ -3,3 +3,9 @@
 **/backup-artifacts/*
 **/restore-artifacts/*
 .DS_Store
+
+# Allow custom configurations
+!drvital-custom/
+!drvital-custom/.env
+!drvital-custom/docker-compose.yml
+!drvital-custom/custom-config/

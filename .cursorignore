@@ -1,0 +1,6 @@
+# Allow all files by default
+!*
+
+# Allow our custom directory
+!drvital-custom/
+!drvital-custom/** 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrVital Demo - Healthcare Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --drvital-primary: #2c3e50;
+            --drvital-secondary: #3498db;
+        }
+        .navbar {
+            background-color: var(--drvital-primary);
+        }
+        .demo-container {
+            height: calc(100vh - 56px);
+            width: 100%;
+            border: none;
+        }
+        .btn-primary {
+            background-color: var(--drvital-secondary);
+            border-color: var(--drvital-secondary);
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">DrVital</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/demo">Demo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Demo Frame -->
+    <iframe id="demoFrame" class="demo-container" src="http://localhost:8080/openmrs" title="DrVital Demo"></iframe>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Function to handle iframe loading
+        window.onload = function() {
+            const demoFrame = document.getElementById('demoFrame');
+            demoFrame.onload = function() {
+                // Add any initialization code here
+                console.log('Demo frame loaded');
+            };
+        };
+    </script>
+</body>
+</html> 

@@ -1,0 +1,68 @@
+version: '3.7'
+
+x-default-logging: &default
+  {}
+
+x-loki-logging: &loki
+  driver: loki
+  options:
+    loki-url: ${LOKI_URL:?}
+    mode: non-blocking
+    max-buffer-size: 4m
+    loki-retries: "3"
+
+x-log-config: &log-config
+  <<: *default
+
+services:
+  proxy:
+    image: 'bahmni/proxy:${PROXY_IMAGE_TAG:?}'
+    ports:
+      - '80:80'
+      - '443:443'
+    logging: *log-config
+    restart: ${RESTART_POLICY}
+    environment:
+      TZ: ${TZ}
+      INSTITUTION_NAME: ${INSTITUTION_NAME}
+      INSTITUTION_SHORT_NAME: ${INSTITUTION_SHORT_NAME}
+
+  openmrs:
+    image: 'bahmni/openmrs:${OPENMRS_IMAGE_TAG:?}'
+    volumes:
+      - '${CONFIG_VOLUME:?}:/usr/local/bahmni_config/:ro'
+      - 'openmrsdata:/usr/local/tomcat/.OpenMRS'
+    environment:
+      TZ: ${TZ}
+      INSTITUTION_NAME: ${INSTITUTION_NAME}
+      INSTITUTION_SHORT_NAME: ${INSTITUTION_SHORT_NAME}
+      DEFAULT_LOCALE: ${DEFAULT_LOCALE}
+      DEFAULT_COUNTRY: ${DEFAULT_COUNTRY}
+      DEFAULT_TIMEZONE: ${DEFAULT_TIMEZONE}
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    logging: *log-config
+    restart: ${RESTART_POLICY}
+
+  mysqldb:
+    image: '${MYSQL_IMAGE_NAME:?}'
+    volumes:
+      - 'mysqldata:/var/lib/mysql'
+    healthcheck:
+      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      TZ: ${TZ}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    logging: *log-config
+    restart: ${RESTART_POLICY}
+
+volumes:
+  openmrsdata:
+  mysqldata: 
