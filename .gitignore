@@ -1,8 +1,40 @@
+# IDE and Editor files
 .idea/
-.cache/
-**/backup-artifacts/*
-**/restore-artifacts/*
+.vscode/
+*.swp
+*.swo
 .DS_Store
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Docker volumes
+docker-volumes/
+data/
+
+# Logs
+*.log
+logs/
+
+# Build artifacts
+dist/
+build/
+*.pyc
+__pycache__/
+
+# Dependencies
+node_modules/
+venv/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+tmp/
+temp/
 
 # Allow custom configurations
 !drvital-custom/

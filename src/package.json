@@ -1,0 +1,25 @@
+{
+  "name": "drvital-web",
+  "version": "1.0.0",
+  "description": "DrVital Healthcare Management System Web Interface",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "sass src/styles:public/css",
+    "build:js": "webpack --mode production",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "bootstrap": "^5.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "sass": "^1.63.6",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "nodemon": "^3.0.1"
+  }
+} 
